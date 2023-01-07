@@ -12,9 +12,9 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setLogin } from "../state";
+import { setLogin } from "../../state";
 import Dropzone from "react-dropzone";
-import FlexBetween from "./FlexBetween";
+import FlexBetween from "../../components/FlexBetween";
 import { shape } from "@mui/system";
 
 const registerScheme = yup.object().shape({
@@ -60,8 +60,10 @@ const Form = () => {
     const register = async (values, onSubmitProps) => {
         const formData = new FormData();
         for (let value in values) {
+            console.log(value, value[value]);
             formData.append(value, values[value])
         }
+
         formData.append("picturePath", values.picture.name);
 
         const savedUserResponse = await fetch(
@@ -72,17 +74,16 @@ const Form = () => {
             }
         );
 
+        console.log(savedUserResponse);
         const savedUser = await savedUserResponse.json();
-
+        console.log(savedUser);
         onSubmitProps.resetForm();
-
         if (savedUser) {
             setPageType("login");
         }
     };
 
     const login = async (values, onSubmitProps) => {
-
         const loggedInResponse = await fetch(
             "http://localhost:3001/auth/login",
             {
@@ -91,11 +92,8 @@ const Form = () => {
                 body: JSON.stringify(values)
             }
         );
-
         const loggedIn = await loggedInResponse.json();
-
         onSubmitProps.resetForm();
-
         if (loggedIn) {
             dispatch(
                 setLogin({
@@ -183,7 +181,7 @@ const Form = () => {
                                 sx={{ gridColumn: "span 4" }}
                             />
                             <Box
-                                gridAutoRows="span 4"
+                                gridColumn="span 4"
                                 border={`1px solid ${palette.neutral.medium}`}
                                 borderRadius="5px"
                                 p="1rem"
@@ -209,12 +207,11 @@ const Form = () => {
                                             }}
                                         >
                                             <input {...getInputProps()} />
-                                            {!values.picture ? (<p>Add Picture Here</p>) : <FlexBetween><Typography>{values.picture.name}</Typography></FlexBetween>}
+                                            {!values.picture ? (<p>Add Picture Here</p>) : <FlexBetween><Typography>{values.picture.name}</Typography> <EditOutlinedIcon /></FlexBetween>}
                                         </Box>
                                     )}
                                 </Dropzone>
                             </Box>
-
                         </>
                     )}
                     <TextField
@@ -247,7 +244,7 @@ const Form = () => {
                             m: "2rem 0",
                             p: "1rem",
                             backgroundColor: palette.primary.main,
-                            color: palette.primary.alt,
+                            color: palette.background.alt,
                             "&:hover": {
                                 color: palette.primary.main
                             }
