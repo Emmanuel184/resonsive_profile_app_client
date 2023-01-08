@@ -7,7 +7,7 @@ import {
     MicOutlined,
     MoreHorizOutlined
 } from "@mui/icons-material"
-import { Box, Divider, Typography, InputBase, useTheme, Button, IconButton, useMediaQuery, Icon } from "@mui/material";
+import { Box, Divider, Typography, InputBase, useTheme, Button, IconButton, useMediaQuery } from "@mui/material";
 import FlexBetween from "../../components/FlexBetween";
 import Dropzone from "react-dropzone";
 import UserImage from "../../components/UserImage";
@@ -141,11 +141,11 @@ const MyPostWidget = ({ picturePath }) => {
                             <Typography color={mediumMain}>Clip</Typography>
                         </FlexBetween>
                         <FlexBetween gap="0.25rem">
-                            <GifBoxOutlined sx={{ color: mediumMain }} />
+                            <AttachFileOutlined sx={{ color: mediumMain }} />
                             <Typography color={mediumMain}>Attachment</Typography>
                         </FlexBetween>
                         <FlexBetween gap="0.25rem">
-                            <GifBoxOutlined sx={{ color: mediumMain }} />
+                            <MicOutlined sx={{ color: mediumMain }} />
                             <Typography color={mediumMain}>Audio</Typography>
                         </FlexBetween>
                     </>
