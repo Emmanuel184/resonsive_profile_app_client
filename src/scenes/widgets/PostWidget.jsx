@@ -9,19 +9,19 @@ import { setPost } from "../../state";
 
 const PostWidget = ({ postId, postUserId, name, description, location, picturePath, userPicturePath, likes, comments }) => {
 
-    console.log("POST WIDGET", postId, postUserId, name, description, location, picturePath, userPicturePath, likes, comments);
-
+    
     const [isComments, setIsComments] = useState(false);
     const dispatch = useDispatch();
     const token = useSelector((state) => state.token);
     const loggedInUserId = useSelector((stae) => stae.user._id);
     const isLiked = Boolean(likes[loggedInUserId]);
     const likeCount = Object.keys(likes).length;
-
+    
     const { palette } = useTheme();
     const main = palette.neutral.main;
     const primary = palette.neutral.medium;
-
+    
+    console.log("POST WIDGET", postId, postUserId, name, description, location, picturePath, userPicturePath, likes, comments);
     const patchLike = async () => {
 
         const response = await fetch(`http://localhost:3001/posts/${postId}/like`,
@@ -38,7 +38,7 @@ const PostWidget = ({ postId, postUserId, name, description, location, picturePa
 
         const updatedPost = await response.json();
 
-        dispatch(setPost({ posts: updatedPost }));
+        dispatch(setPost({ post: updatedPost }));
     }
     return (
         <WidgetWrapper m="2rem 0">
@@ -57,7 +57,7 @@ const PostWidget = ({ postId, postUserId, name, description, location, picturePa
                     height="auto"
                     alt="post"
                     style={{ borderRadius: "0.75rem", marginTop: "0.75rem" }}
-                    src={`http:/localhost:3001/assets/${picturePath}`}
+                    src={`http://localhost:3001/assets/${picturePath}`}
                 />
             )}
             <FlexBetween gap="0.25rem">
@@ -65,7 +65,7 @@ const PostWidget = ({ postId, postUserId, name, description, location, picturePa
                     <FlexBetween gap="0.3rem">
                         <IconButton onClick={patchLike}>
                             {isLiked ? (
-                                <FavoriteOutlined sx={{ color: primary }} />
+                                <FavoriteOutlined sx={{ color: main }} />
                             ) : (
                                 <FavoriteBorderOutlined />
                             )}
@@ -73,8 +73,8 @@ const PostWidget = ({ postId, postUserId, name, description, location, picturePa
                         <Typography>{likeCount}</Typography>
                     </FlexBetween>
                     <FlexBetween gap="0.3rem">
-                        <IconButton onClick={() => setIsComments(!isComments)}>
                             <ChatBubbleOutlineOutlined />
+                        <IconButton onClick={() => setIsComments(!isComments)}>
                             <Typography>{comments.length}</Typography>
                         </IconButton>
                     </FlexBetween>
@@ -90,6 +90,7 @@ const PostWidget = ({ postId, postUserId, name, description, location, picturePa
                             key={`${name} - ${index}`}
                         >
                             <Divider />
+                            {comment}
                             <Typography sx={{ color: main, m: "0.5rem", pl: "1rem" }} />
                         </Box>
                     ))}

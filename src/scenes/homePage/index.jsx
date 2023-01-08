@@ -7,8 +7,10 @@ import PostsWidget from "../widgets/PostsWidget";
 
 const HomePage = () => {
 
-    const isNonMobileScreens = useMediaQuery("(min-width: 600px)");
+    const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
     const { _id, picturePath } = useSelector((state) => state.user);
+
+    console.log("HOMEPAGE", _id, picturePath);
 
     return (
         <Box>
