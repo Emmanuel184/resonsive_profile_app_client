@@ -17,21 +17,21 @@ const AdvertWidget = () => {
                     Sponsered
                 </Typography>
                 <Typography color={medium}>Create Ad</Typography>
-                <img
-                    width="100%"
-                    height="auto"
-                    alt="advert"
-                    src="http://localhost:3001/assets/info4.jpeg"
-                    style={{ borderRadius: "0.75rem", margin: "0.75rem" }}
-                />
-                <FlexBetween>
-                    <Typography color={main}>Advert</Typography>
-                    <Typography color={medium}>Company Website</Typography>
-                </FlexBetween>
-                <Typography color={medium} m="0.5rem 0">
-                    Ads are so cool ??:) How about someone pay to be here?
-                </Typography>
             </FlexBetween>
+            <img
+                width="100%"
+                height="auto"
+                alt="advert"
+                src="http://localhost:3001/assets/info4.jpeg"
+                style={{ borderRadius: "0.75rem", margin: "0.75rem 0" }}
+            />
+            <FlexBetween>
+                <Typography color={main}>Advert</Typography>
+                <Typography color={medium}>Company Website</Typography>
+            </FlexBetween>
+            <Typography color={medium} m="0.5rem 0">
+                Ads are so cool ??:) How about someone pay to be here? Add alot of more text in here lol
+            </Typography>
         </WidgetWrapper>
     )
 
